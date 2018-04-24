@@ -11,4 +11,14 @@ router.get('/', (req, res) => {
     .catch((err) => console.log(err))
 })
 
+router.post('/', (req, res) => {
+  const user = req.body.user
+  console.log("CREATING USER", user)
+  User.create(user)
+    .then((data) => {
+      res.json(data)
+    })
+    .catch((err) => console.log(err))
+})
+
 module.exports = router
