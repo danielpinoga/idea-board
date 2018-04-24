@@ -7,7 +7,6 @@ const IdeaSchema = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true,
     default: "New Title"
   },
   description: {
@@ -16,7 +15,7 @@ const IdeaSchema = new Schema({
     default: "New Description"
   },
   created: {
-    type: Date,
+    type: String,
     required: true,
     default: new Date()
   }

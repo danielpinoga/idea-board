@@ -22,8 +22,26 @@ class LogIn extends Component {
       })
   }
 
+  createUser = () => {
+    axios.post('/api/users', {
+      user: this.state.user
+    }).then((res) => {
+      this.setState({ redirectToHome: true, createdUser: res.data })
+    })
+  }
+
+  handleSignUp = (e) => {
+    e.preventDefault()
+    this.createUser()
+  }
+
+  handleChange = (event) => {
+    const user = { ...this.state.user }
+    user[event.target.name] = event.target.value
+    this.setState({ user })
+  }
+
   render() {
-    console.log("Users in state at LogIn Render", this.state.users)
     const userLinks = this.state.users.map((user, i) => {
       return (
         <div key={i}>
