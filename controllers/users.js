@@ -18,10 +18,12 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-  User.findById(req.params.id).then((user) => {
-    user.ideas = user.ideas.reverse()
-    res.json(user)
-  }).catch(console.log)
+  User.findById(req.params.id)
+    .then((user) => {
+      user.ideas = user.ideas.reverse()
+      res.json(user)
+    })
+    .catch(console.log)
 })
 
 module.exports = router
