@@ -68,7 +68,18 @@ class IdeaPage extends Component {
       })
   }
 
+  createNewIdea = () => {
+    const userId = this.state.user._id
+    const url = `/api/users/${userId}/ideas`
+    console.log("CREATE IDEA ROUTE BEING CALLED", url)
+    axios.post(url)
+      .then((res) => {
+        console.log("RESPONSE FROM NEW IDEA", res.data)
+      })
+  }
+
   render() {
+    console.log("RENDERING", this.state.user)
     const ideas = this.state.ideas.map((idea, i) => {
       return (
         <FormWrapper key={i}>
@@ -83,7 +94,7 @@ class IdeaPage extends Component {
       <div>
         <div>
           <h1>{this.state.user.userName}'s Idea Board</h1>
-          <StyledButton>New Idea</StyledButton>
+          <StyledButton onClick={this.createNewIdea}>New Idea</StyledButton>
         </div>
         <IdeaContainer>
           {ideas}
