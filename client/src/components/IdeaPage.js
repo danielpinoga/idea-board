@@ -2,7 +2,36 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
+const FormWrapper = styled.div`
+  
+  display: flex;
+  flex-direction: column;
+  
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 11rem;
+  background: yellow;
+  color: white;
+  border: 2px solid white;
+  button {
+    background-color: #123456;
+    color: white;
+  }
+`
+const StyledButton = styled.button`
+background-color: #123456;
+color: white;
+    background-color: #123456;
+    color: white;
+`
+const IdeaContainer = styled.span`
+background-color:yellow;
+margin: 5px;
+`
+
 class IdeaPage extends Component {
+
   state = {
     user: {
       userName: 'Bob'
@@ -42,11 +71,11 @@ class IdeaPage extends Component {
   render() {
     const ideas = this.state.ideas.map((idea, i) => {
       return (
-        <div key={i}>
+        <FormWrapper key={i}>
           <input type="text" name="title" value={idea.title} onChange={this.handleChange} />
           <textarea name="description" value={idea.description} onChange={this.handleChange} />
           <button>Delete Idea</button>
-        </div>
+        </FormWrapper>
       )
     })
 
@@ -54,11 +83,11 @@ class IdeaPage extends Component {
       <div>
         <div>
           <h1>{this.state.user.userName}'s Idea Board</h1>
-          <button>New Idea</button>
+          <StyledButton>New Idea</StyledButton>
         </div>
-        <div>
+        <IdeaContainer>
           {ideas}
-        </div>
+        </IdeaContainer>
       </div>
     )
   }
