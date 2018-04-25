@@ -27,6 +27,10 @@ app.get('/', (req, res) => {
 const UsersController = require('./controllers/users')
 app.use('/api/users', UsersController)
 
+
+const IdeasController = require('./controllers/ideas')
+app.use('/api/users/:userId/ideas', IdeasController)
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log("Magic happening on port " + PORT);
