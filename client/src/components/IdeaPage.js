@@ -69,12 +69,34 @@ class IdeaPage extends Component {
   }
 
   createNewIdea = () => {
-    const userId = this.state.user._id
-    const url = `/api/users/${userId}/ideas`
-    console.log("CREATE IDEA ROUTE BEING CALLED", url)
-    axios.post(url)
+    axios.post(`/api/users/${this.state.user._id}/ideas`)
       .then((res) => {
         console.log("RESPONSE FROM NEW IDEA", res.data)
+      })
+  }
+
+  deleteIdea = (ideaId) => {
+    axios.delete(`/api/users/${this.state.user._id}/ideas/${ideaId}`)
+      .then((response) => {
+        console.log(response)
+      })
+  }
+
+  handleChange = (changedIdea, event) => {
+    const ideas = [...this.state.ideas]
+    const newIdeas = ideas.map((idea) => {
+      if (idea._id === changedIdea._id) {
+        idea[event.target.name] = event.target.value
+      }
+      return idea
+    })
+    this.setState({ ideas: newIdeas })
+  }
+
+  updateIdea = (idea) => {
+    axios.patch(`/api/users/${this.state.user.id}/ideas/${idea._id}`, { idea })
+      .then(res => {
+        this.setState({ ideas: res.data.ideas })
       })
   }
 
@@ -83,9 +105,21 @@ class IdeaPage extends Component {
     const ideas = this.state.ideas.map((idea, i) => {
       return (
         <FormWrapper key={i}>
-          <input type="text" name="title" value={idea.title} onChange={this.handleChange} />
-          <textarea name="description" value={idea.description} onChange={this.handleChange} />
-          <button>Delete Idea</button>
+          <input
+            type="text"
+            name="title"
+            value={idea.title}
+            onChange={(event) => this.handleChange(idea, event)} />
+
+          <textarea
+            name="description"
+            value={idea.description}
+            onChange={(event) => this.handleChange(idea, event)} />
+
+          <button
+            onClick={() => { this.deleteIdea(idea._id) }}>
+            Delete Idea
+          </button>
         </FormWrapper>
       )
     })
