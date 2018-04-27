@@ -72,6 +72,7 @@ class IdeaPage extends Component {
     axios.post(`/api/users/${this.state.user._id}/ideas`)
       .then((res) => {
         console.log("RESPONSE FROM NEW IDEA", res.data)
+        this.setState({ ideas: res.data.ideas.reverse() })
       })
   }
 
@@ -95,7 +96,8 @@ class IdeaPage extends Component {
 
   updateIdea = (idea) => {
     console.log("UPDATING IDEA IN DB")
-    axios.patch(`/api/users/${this.state.user.id}/ideas/${idea._id}`, { idea })
+    console.log("User Id being Updated", this.state.user._id)
+    axios.patch(`/api/users/${this.state.user._id}/ideas/${idea._id}`, { idea })
       .then(res => {
         this.setState({ ideas: res.data.ideas })
       })

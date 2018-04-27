@@ -12,9 +12,11 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const newUser = new User(req.body.user)
-  newUser.save().then((user) => {
-    res.json(user)
-  }).catch(console.log)
+  newUser.save()
+    .then((user) => {
+      res.json(user)
+    })
+    .catch(console.log)
 })
 
 router.get('/:id', (req, res) => {

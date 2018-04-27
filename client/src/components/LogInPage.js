@@ -4,7 +4,11 @@ import axios from 'axios'
 
 class LogIn extends Component {
   state = {
-    users: []
+    users: [],
+    user: {
+      userName: '',
+      password: ''
+    }
   }
 
   componentDidMount() {

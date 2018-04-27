@@ -32,6 +32,8 @@ router.delete('/:id', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
+  console.log("HITTING IDEA PATCH ROUTE")
+  console.log("User Id", req.params.userId)
   User.findById(req.params.userId)
     .then((user) => {
       const idea = user.ideas.id(req.params.id)
@@ -47,7 +49,9 @@ router.patch('/:id', (req, res) => {
           user.ideas = user.ideas.reverse()
           res.json(user)
         })
+        .catch(console.err)
     })
+    .catch(console.err)
 })
 
 module.exports = router
