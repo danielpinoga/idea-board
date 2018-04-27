@@ -94,6 +94,7 @@ class IdeaPage extends Component {
   }
 
   updateIdea = (idea) => {
+    console.log("UPDATING IDEA IN DB")
     axios.patch(`/api/users/${this.state.user.id}/ideas/${idea._id}`, { idea })
       .then(res => {
         this.setState({ ideas: res.data.ideas })
@@ -109,11 +110,13 @@ class IdeaPage extends Component {
             type="text"
             name="title"
             value={idea.title}
+            onBlur={() => this.updateIdea(idea)}
             onChange={(event) => this.handleChange(idea, event)} />
 
           <textarea
             name="description"
             value={idea.description}
+            onBlur={() => this.updateIdea(idea)}
             onChange={(event) => this.handleChange(idea, event)} />
 
           <button

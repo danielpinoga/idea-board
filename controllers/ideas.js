@@ -35,12 +35,12 @@ router.patch('/:id', (req, res) => {
   User.findById(req.params.userId)
     .then((user) => {
       const idea = user.ideas.id(req.params.id)
-      const update = req.body.idea
-      if (update.title) {
-        idea.title = update.title
+      const updatedIdea = req.body.idea
+      if (updatedIdea.title) {
+        idea.title = updatedIdea.title
       }
-      if (update.description) {
-        idea.description = update.description
+      if (updatedIdea.description) {
+        idea.description = updatedIdea.description
       }
       user.save()
         .then((user) => {
